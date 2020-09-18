@@ -164,8 +164,6 @@ import Vue from 'vue';
 export default {
 	data() {
 		return {
-			// Items TO Display For Each Paginated Page
-			itemsPerPage: 100,
 			// Current Page Number In Pagination
 			currentPage: 1,
 			// Current Page Items
