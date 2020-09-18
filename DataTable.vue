@@ -1,7 +1,8 @@
 <!-- 
 	Vue Datatable 
 	Description: Vue Component for datatable with search, sorting, editing and pagination
-	Author: Antonio Okoro 
+	Original Author: Antonio Okoro
+	Github @cheezytony
 	Version: 1.0.0 
 -->
 <template>
@@ -213,7 +214,7 @@ export default {
 		
 		// Sort
 		// Column For Sorting
-		sortColumn: {
+		columnToSort: {
 			type: String,
 			default: () => null
 		},
@@ -561,6 +562,9 @@ export default {
 		}
 	},
 	computed: {
+		sortColumn() {
+			return columnToSort;
+		},
 		// Total Number Of Pages For Pagination
 		pages() {
 			if (this.renderedItems.length > this.itemsPerPage) {
@@ -720,19 +724,25 @@ export default {
 					cursor: pointer
 					padding-right: 30px
 					position: relative
-					&:before,
+					&:before
+						display: block
+						// border: 5px solid transparent
+						content: '\2191'
+						opacity: .3
+						position: absolute
+						right: 20px
 					&:after
-						border: 5px solid transparent
-						content: ''
+						// border: 5px solid transparent
+						content: '\2193'
 						display: block
 						opacity: .3
 						position: absolute
-						right: 10px
+						right: 11px
 					&:before
 						border-bottom-color: currentColor
-						top: 10px
+						top: 25%
 					&:after
-						bottom: 10px
+						top: 25%
 						border-top-color: currentColor
 				&.sort
 					font-weight: 700
