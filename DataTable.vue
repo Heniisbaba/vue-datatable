@@ -563,7 +563,7 @@ export default {
 	},
 	computed: {
 		sortColumn() {
-			return columnToSort;
+			return this.columnToSort;
 		},
 		// Total Number Of Pages For Pagination
 		pages() {
