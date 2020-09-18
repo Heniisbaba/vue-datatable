@@ -141,13 +141,13 @@
 				<div class="col-md-6" v-if="paginate">
 					<ul class="pagination" v-if="paginateLinks.length">
 						<li class="page-item" v-if="pages && currentPage != 1">
-							<span class="page-link" @click="prev">Prev</span>
+							<span class="page-link" @click="prev" v-html="previousText">{{ previousText }}</span>
 						</li>
 						<li class="page-item" v-bind:key="item.page" v-for="item in paginateLinks" :class="{active: currentPage == item.page}">
 							<span class="page-link" @click="paginate(item.page)">{{ item.page }}</span>
 						</li>
 						<li class="page-item" v-if="pages && currentPage < pages">
-							<span class="page-link" @click="next">Next</span>
+							<span class="page-link" @click="next" v-html="nextText">{{ nextText }}</span>
 						</li>
 					</ul>
 				</div>
@@ -171,7 +171,7 @@ export default {
 			// Sort Order
 			asc: "asc",
 			// Column For Sorting
-			sortColumn: null,
+			// sortColumn: null,
 			// Search Query
 			query: '',
 			// Table Headers
@@ -211,13 +211,30 @@ export default {
 			default: () => {}
 		},
 		
+		// Sort
+		// Column For Sorting
+		sortColumn: {
+			type: String,
+			default: () => null
+		},
 		
 		// Table Items
 		// Items TO Display For Each Paginated Page
 		itemsPerPage: {
 			type: Number,
 			default: () => 10
-        },
+		},
+		// Pagination button text
+		previousText: {
+			type: String,
+			default : () => 'Previous'
+		},
+		
+		//set next pagination control text
+		nextText: {
+			type: String,
+			default : () => 'Next'
+		},
 		data: {
 			type: Array,
 			default: () => []
@@ -397,7 +414,7 @@ export default {
 			this.renderedItems = this.renderedItems.sort((a, b) => {
 				var indexA = a.index;
 				var indexB = b.index;
-				return indexA > indexB ? 1 : -1;
+				return indexB > indexA ? 1 : -1;
 			});
 			this.asc = this.sortColumn == '#' ? !this.asc : true;
 
@@ -614,7 +631,7 @@ export default {
 
 		// Set Default Sorting To Index
 		// Asc will be converted to false so order will be in reverse
-		this.asc = true;
+		this.asc = false;
 		this.sortIndex();
 
 		// Use Provided Data If Ajax Is Not Specified 
