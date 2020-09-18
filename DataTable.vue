@@ -215,6 +215,11 @@ export default {
 		
 		
 		// Table Items
+		// Items TO Display For Each Paginated Page
+		itemsPerPage: {
+			type: Number,
+			default: () => 10
+        },
 		data: {
 			type: Array,
 			default: () => []
