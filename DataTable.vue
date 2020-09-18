@@ -562,9 +562,6 @@ export default {
 		}
 	},
 	computed: {
-		sortColumn() {
-			return this.columnToSort;
-		},
 		// Total Number Of Pages For Pagination
 		pages() {
 			if (this.renderedItems.length > this.itemsPerPage) {
@@ -602,6 +599,9 @@ export default {
 		}
 	},
 	watch: {
+		sortColumn() {
+			return this.columnToSort;
+		},
 		currentPage(newValue) {
 			this.paginatedItems = this.renderedItems.slice(this.itemsPerPage * (newValue - 1), (this.itemsPerPage * newValue));
 		},
